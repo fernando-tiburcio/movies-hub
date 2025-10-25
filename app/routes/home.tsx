@@ -1,13 +1,15 @@
-import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { Home as HomeComponent } from "../Home";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Movies Hub - Filmes Populares" },
+    {
+      name: "description",
+      content: "Descubra os filmes mais populares do momento com Movies Hub",
+    },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <HomeComponent />;
 }
