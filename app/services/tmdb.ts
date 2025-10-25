@@ -6,9 +6,17 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 export class TMDBService {
   private static async fetchFromTMDB<T>(endpoint: string): Promise<T> {
     const url = `${TMDB_BASE_URL}${endpoint}?api_key=${TMDB_API_KEY}`;
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWFmOWU1YmExZGVjZWI3ZDhkMTUzYjYyZWUyYTJiZCIsIm5iZiI6MTc2MTM5NDU1OC41NDgsInN1YiI6IjY4ZmNiZjdlMGE4OWJhMmE3YWZiNjhiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rxGFXDcawqJWjPjTNO1YULIpNuE7s6Ht00iAEjJZtpc",
+      },
+    };
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, options);
       if (!response.ok) {
         throw new Error(`TMDB API error: ${response.status}`);
       }
@@ -20,7 +28,9 @@ export class TMDBService {
   }
 
   static async getPopularMovies(page: number = 1): Promise<MoviesResponse> {
-    return this.fetchFromTMDB<MoviesResponse>(`/movie/popular?page=${page}`);
+    return this.fetchFromTMDB<MoviesResponse>(
+      `/movie/popular?language=en-US&page=${page}`
+    );
   }
 
   static async searchMovies(
