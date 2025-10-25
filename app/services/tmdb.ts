@@ -29,7 +29,7 @@ export class TMDBService {
 
   static async getPopularMovies(page: number = 1): Promise<MoviesResponse> {
     return this.fetchFromTMDB<MoviesResponse>(
-      `/movie/popular?language=en-US&page=${page}`
+      `/movie/popular?language=pt-BR&page=${page}`
     );
   }
 
