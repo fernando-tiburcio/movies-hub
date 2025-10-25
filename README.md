@@ -1,87 +1,105 @@
-# Welcome to React Router!
+# Movies Hub
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Uma aplicação moderna para visualização de filmes usando a API do TMDB (The Movie Database).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Funcionalidades
 
-## Features
+- 🎬 **Filmes Populares**: Visualize os filmes mais populares do momento
+- 🔍 **Busca Global**: Pesquise filmes por título
+- ❤️ **Sistema de Favoritos**: Marque filmes como favoritos (salvo no localStorage)
+- 📱 **Design Responsivo**: Interface adaptada para todos os dispositivos
+- 🌙 **Modo Escuro**: Suporte automático ao tema escuro
+- ♾️ **Infinite Scroll**: Carregamento automático de mais filmes
+- ⭐ **Avaliações TMDB**: Notas dos filmes diretamente do TMDB
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Configuração
 
-## Getting Started
+### 1. Obter Chave da API do TMDB
 
-### Installation
+1. Acesse [TMDB](https://www.themoviedb.org/)
+2. Crie uma conta gratuita
+3. Vá para "API" no menu do usuário
+4. Solicite uma chave de API
+5. Copie sua chave de API
 
-Install the dependencies:
+### 2. Configurar a Chave da API
+
+Abra o arquivo `app/services/tmdb.ts` e substitua:
+
+```typescript
+const TMDB_API_KEY = "your_tmdb_api_key_here";
+```
+
+Pela sua chave real:
+
+```typescript
+const TMDB_API_KEY = "sua_chave_aqui";
+```
+
+### 3. Instalar Dependências
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+### 4. Executar o Projeto
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+## Estrutura do Projeto
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+app/
+├── components/
+│   ├── Header.tsx          # Header com logo e busca
+│   ├── MovieCard.tsx       # Card individual do filme
+│   └── MovieGrid.tsx       # Grid responsivo com infinite scroll
+├── hooks/
+│   └── useFavorites.ts     # Hook para gerenciar favoritos
+├── services/
+│   └── tmdb.ts             # Serviço para integração com TMDB
+├── types/
+│   └── movie.ts            # Tipos TypeScript para filmes
+└── Home/
+    └── index.tsx           # Componente principal da página home
 ```
 
-## Styling
+## Tecnologias Utilizadas
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- **React Router v7**: Roteamento
+- **TypeScript**: Tipagem estática
+- **Tailwind CSS**: Estilização
+- **Lucide React**: Ícones
+- **TMDB API**: Dados dos filmes
 
----
+## Funcionalidades dos Cards
 
-Built with ❤️ using React Router.
+Cada card de filme exibe:
+
+- **Poster**: Imagem do filme (300px de largura)
+- **Nota TMDB**: Avaliação com ícone de estrela
+- **Botão de Favoritar**: Coração que muda de cor quando favoritado
+- **Título**: Nome do filme
+- **Ano**: Ano de lançamento
+- **Sinopse**: Aparece no hover (truncada)
+
+## Sistema de Favoritos
+
+- Os favoritos são salvos no `localStorage` do navegador
+- Persistem entre sessões
+- Interface visual clara (coração preenchido quando favoritado)
+
+## Responsividade
+
+O grid se adapta automaticamente:
+
+- **Mobile**: 2 colunas
+- **Tablet**: 3-4 colunas
+- **Desktop**: 5-6 colunas
+- **Large Desktop**: 6 colunas
+
+## Modo Escuro
+
+O tema escuro é ativado automaticamente baseado nas preferências do sistema operacional do usuário.
