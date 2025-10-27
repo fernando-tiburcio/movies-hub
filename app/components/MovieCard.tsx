@@ -2,17 +2,20 @@ import { Link } from "react-router";
 import { Heart, Star } from "lucide-react";
 import type { Movie } from "../types/movie";
 import { TMDBService } from "../services/tmdb";
+import { Highlight } from "../utils/highlight";
 
 interface MovieCardProps {
   movie: Movie;
   isFavorite: boolean;
   onToggleFavorite: (movieId: number) => void;
+  searchQuery?: string;
 }
 
 export function MovieCard({
   movie,
   isFavorite,
   onToggleFavorite,
+  searchQuery,
 }: MovieCardProps) {
   const posterUrl = TMDBService.getPosterUrl(movie.poster_path);
 
@@ -78,7 +81,7 @@ export function MovieCard({
       {/* Informações do filme */}
       <div className="p-3">
         <h3 className="font-semibold text-gray-900 dark:text-white text-sm line-clamp-2 mb-1">
-          {movie.title}
+          <Highlight text={movie.title} searchTerm={searchQuery || ""} />
         </h3>
         <p className="text-gray-600 dark:text-gray-400 text-xs">
           {formatReleaseDate(movie.release_date)}

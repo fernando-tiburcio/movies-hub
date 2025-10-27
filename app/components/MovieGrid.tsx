@@ -136,6 +136,7 @@ export function MovieGrid({ searchQuery }: MovieGridProps) {
                 movie={movie}
                 isFavorite={isFavorite(movie.id)}
                 onToggleFavorite={toggleFavorite}
+                searchQuery={searchQuery}
               />
             </div>
           );

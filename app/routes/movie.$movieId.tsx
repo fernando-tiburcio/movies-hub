@@ -17,8 +17,8 @@ export default function MovieDetailsPage() {
 
   if (!params.movieId) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
-        <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 py-8 pt-20">
           <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Erro

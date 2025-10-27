@@ -1,16 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
 import { Search, Film } from "lucide-react";
 
 interface HeaderProps {
-  onSearch: (query: string) => void;
+  onSearch?: (query: string) => void;
 }
 
 export function Header({ onSearch }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Load search query from URL if we're on the search page
+  useEffect(() => {
+    if (location.pathname === "/search") {
+      const params = new URLSearchParams(location.search);
+      const queryFromUrl = params.get("q") || "";
+      setSearchQuery(queryFromUrl);
+    }
+  }, [location]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(searchQuery);
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,12 +36,15 @@ export function Header({ onSearch }: HeaderProps) {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
             <Film className="h-8 w-8 text-blue-600 dark:text-blue-400" />
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">
               Movies Hub
             </h1>
-          </div>
+          </button>
 
           {/* Barra de busca */}
           <form onSubmit={handleSubmit} className="flex-1 max-w-md">

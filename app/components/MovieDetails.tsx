@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Heart, Star, ArrowLeft } from "lucide-react";
 import { TMDBService } from "../services/tmdb";
 import { useFavorites } from "../hooks/useFavorites";
+import { Header } from "./Header";
 import type { MovieDetails } from "../types/movie";
 
 interface MovieDetailsProps {
@@ -63,8 +64,9 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
-        <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Header />
+        <div className="container mx-auto px-4 py-8 pt-20">
           <div className="flex justify-center items-center min-h-[400px]">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
@@ -75,8 +77,9 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
 
   if (error || !movie) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
-        <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Header />
+        <div className="container mx-auto px-4 py-8 pt-20">
           <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Erro ao carregar filme
@@ -104,8 +107,9 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Header />
       {/* Header com botão voltar */}
-      <div className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+      <div className="bg-white dark:bg-gray-800 shadow-md sticky top-20 z-50">
         <div className="container mx-auto px-4 py-4">
           <button
             onClick={() => navigate(-1)}
@@ -118,7 +122,7 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 pt-24">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Imagem na esquerda */}
           <div className="flex-shrink-0 w-full lg:w-[40%]">
