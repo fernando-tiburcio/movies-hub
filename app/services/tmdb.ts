@@ -52,4 +52,12 @@ export class TMDBService {
     }
     return `https://image.tmdb.org/t/p/${size}${posterPath}`;
   }
+
+  static async getMovieDetails(
+    movieId: number
+  ): Promise<import("../types/movie").MovieDetails> {
+    return this.fetchFromTMDB<import("../types/movie").MovieDetails>(
+      `/movie/${movieId}?language=pt-BR`
+    );
+  }
 }

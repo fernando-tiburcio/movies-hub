@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Heart, Star } from "lucide-react";
 import type { Movie } from "../types/movie";
 import { TMDBService } from "../services/tmdb";
@@ -28,7 +29,10 @@ export function MovieCard({
   };
 
   return (
-    <div className="group relative bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <Link
+      to={`/movie/${movie.id}`}
+      className="group relative bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden block"
+    >
       {/* Poster */}
       <div className="relative aspect-[2/3] overflow-hidden">
         <img
@@ -48,7 +52,7 @@ export function MovieCard({
         {/* Botão de favoritar */}
         <button
           onClick={handleFavoriteClick}
-          className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-200"
+          className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-200 z-10"
           aria-label={
             isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"
           }
@@ -80,6 +84,6 @@ export function MovieCard({
           {formatReleaseDate(movie.release_date)}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
