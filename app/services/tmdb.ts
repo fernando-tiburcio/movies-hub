@@ -1,7 +1,10 @@
 import type { Movie, MoviesResponse, SearchResponse } from "../types/movie";
 
-const TMDB_API_KEY = "45af9e5ba1deceb7d8d153b62ee2a2bd";
-const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const TMDB_BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
+const TMDB_ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
+
+console.log(TMDB_API_KEY, TMDB_BASE_URL, TMDB_ACCESS_TOKEN);
 
 export class TMDBService {
   private static async fetchFromTMDB<T>(endpoint: string): Promise<T> {
@@ -10,8 +13,7 @@ export class TMDBService {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NWFmOWU1YmExZGVjZWI3ZDhkMTUzYjYyZWUyYTJiZCIsIm5iZiI6MTc2MTM5NDU1OC41NDgsInN1YiI6IjY4ZmNiZjdlMGE4OWJhMmE3YWZiNjhiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rxGFXDcawqJWjPjTNO1YULIpNuE7s6Ht00iAEjJZtpc",
+        Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`,
       },
     };
 
