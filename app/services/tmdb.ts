@@ -48,7 +48,7 @@ export class TMDBService {
     size: "w300" | "w500" | "w780" = "w300"
   ): string {
     if (!posterPath) {
-      return "/placeholder-poster.png"; // Imagem placeholder para filmes sem poster
+      return "/placeholder-poster.svg"; // Imagem placeholder para filmes sem poster
     }
     return `https://image.tmdb.org/t/p/${size}${posterPath}`;
   }
