@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router";
-import { Search, Film } from "lucide-react";
+import { useNavigate, useLocation, Link } from "react-router";
+import { Search, Film, Heart } from "lucide-react";
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
@@ -60,9 +60,15 @@ export function Header({ onSearch }: HeaderProps) {
             </div>
           </form>
 
-          {/* Espaço para futuras funcionalidades */}
+          {/* Ações */}
           <div className="flex items-center gap-2">
-            {/* Aqui podem ser adicionados botões como filtros, perfil, etc. */}
+            <Link
+              to="/favorites"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors"
+            >
+              <Heart className="h-4 w-4 text-red-500" />
+              Favoritos
+            </Link>
           </div>
         </div>
       </div>

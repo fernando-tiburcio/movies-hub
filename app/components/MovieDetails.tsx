@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Heart, Star, ArrowLeft } from "lucide-react";
 import { TMDBService } from "../services/tmdb";
-import { useFavorites } from "../hooks/useFavorites";
+import { useAppDispatch, useAppSelector } from "../store";
+import { toggleFavorite } from "../store/favoritesSlice";
 import { Header } from "./Header";
 import type { MovieDetails } from "../types/movie";
 
@@ -12,7 +13,8 @@ interface MovieDetailsProps {
 
 export function MovieDetails({ movieId }: MovieDetailsProps) {
   const navigate = useNavigate();
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const dispatch = useAppDispatch();
+  const favoriteIds = useAppSelector((s) => s.favorites.ids);
   const [movie, setMovie] = useState<MovieDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -103,7 +105,7 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
   const backdropUrl = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
     : null;
-  const isMovieFavorite = isFavorite(movie.id);
+  const isMovieFavorite = favoriteIds.includes(movie.id);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -211,7 +213,7 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
             {/* Botão de favoritar */}
             <div>
               <button
-                onClick={() => toggleFavorite(movie.id)}
+                onClick={() => dispatch(toggleFavorite(movie.id))}
                 className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                   isMovieFavorite
                     ? "bg-red-600 hover:bg-red-700 text-white"

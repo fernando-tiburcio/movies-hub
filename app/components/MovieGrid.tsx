@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { MovieCard } from "./MovieCard";
 import { TMDBService } from "../services/tmdb";
-import { useFavorites } from "../hooks/useFavorites";
+import { useAppDispatch, useAppSelector } from "../store";
+import { toggleFavorite } from "../store/favoritesSlice";
 import type { Movie } from "../types/movie";
 
 interface MovieGridProps {
@@ -15,7 +16,10 @@ export function MovieGrid({ searchQuery }: MovieGridProps) {
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const dispatch = useAppDispatch();
+  const favoriteIds = useAppSelector((s) => s.favorites.ids);
+  const isFavorite = (id: number) => favoriteIds.includes(id);
+  const onToggleFavorite = (id: number) => dispatch(toggleFavorite(id));
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastMovieElementRef = useRef<HTMLDivElement | null>(null);
 
@@ -135,7 +139,7 @@ export function MovieGrid({ searchQuery }: MovieGridProps) {
               <MovieCard
                 movie={movie}
                 isFavorite={isFavorite(movie.id)}
-                onToggleFavorite={toggleFavorite}
+                onToggleFavorite={onToggleFavorite}
                 searchQuery={searchQuery}
               />
             </div>
