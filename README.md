@@ -2,6 +2,10 @@
 
 Aplicação moderna para explorar filmes usando a API do TMDB (The Movie Database).
 
+## Projeto publicado para demonstração
+
+- https://movies-hub-self-alpha.vercel.app/
+
 ## Funcionalidades
 
 - **Filmes Populares**: listagem paginada com infinite scroll
