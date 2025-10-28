@@ -4,8 +4,6 @@ const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const TMDB_BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const TMDB_ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
 
-console.log(TMDB_API_KEY, TMDB_BASE_URL, TMDB_ACCESS_TOKEN);
-
 export class TMDBService {
   private static async fetchFromTMDB<T>(endpoint: string): Promise<T> {
     const url = `${TMDB_BASE_URL}${endpoint}?api_key=${TMDB_API_KEY}`;
